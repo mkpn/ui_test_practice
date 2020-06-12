@@ -6,7 +6,9 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProviders
 import makoto.yoshida.uitesttutorial.databinding.ActivityMainBinding
 import makoto.yoshida.uitesttutorial.viewmodel.TestDialogFragmentViewModel

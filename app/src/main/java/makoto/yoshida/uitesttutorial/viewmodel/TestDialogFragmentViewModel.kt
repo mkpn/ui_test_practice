@@ -1,24 +1,27 @@
 package makoto.yoshida.uitesttutorial.viewmodel
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.*
 import makoto.yoshida.uitesttutorial.TestDataBase
 import makoto.yoshida.uitesttutorial.TestEntity
 
 class TestDialogFragmentViewModel : ViewModel() {
-    lateinit var database : TestDataBase
-    val name = MutableLiveData<String>("テスト")
+    private lateinit var database : TestDataBase
+    val name = MutableLiveData("変わるかな？？")
 
     fun setup(context: Context) {
-        val database = TestDataBase.getDatabase(context)
+        database = TestDataBase.getDatabase(context)!!
     }
 
-    fun getData(id: Long) : LiveData<TestEntity>{
-        val mediator = MediatorLiveData<TestEntity>()
-        mediator.addSource(database.testDao().get(id), Observer {
+    fun fetchData() {
+        database.testDao().get(1).observeForever {
+        Log.d("デバッグ", "${it.name}")
             name.postValue(it.name)
-            mediator.postValue(it)
-        })
-        return mediator
+        }
+    }
+
+    fun test() : LiveData<TestEntity>{
+        return database.testDao().get(1)
     }
 }
