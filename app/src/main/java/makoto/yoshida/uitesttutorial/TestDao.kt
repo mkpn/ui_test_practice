@@ -10,4 +10,7 @@ abstract class TestDao {
 
     @Query("select * from test")
     abstract fun getAll(): LiveData<List<TestEntity>>
+
+    @Query("select * from test where id = (:id)")
+    abstract fun get(id: Long): LiveData<TestEntity>
 }
