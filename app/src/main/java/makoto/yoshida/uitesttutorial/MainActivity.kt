@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
+import dagger.hilt.android.AndroidEntryPoint
 import makoto.yoshida.uitesttutorial.databinding.ActivityMainBinding
 import makoto.yoshida.uitesttutorial.domain.TestDataBase
 import makoto.yoshida.uitesttutorial.domain.TestEntity
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding

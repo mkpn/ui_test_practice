@@ -6,7 +6,7 @@ import javax.inject.Singleton
 
 @Singleton
 class TestRepository(context: Context) {
-    val dao = TestDataBase.getDatabase(context)!!.testDao()
+    private val dao = TestDataBase.getDatabase(context)!!.testDao()
 
     fun get(id :Long): LiveData<TestEntity> {
         return dao.get(id)
