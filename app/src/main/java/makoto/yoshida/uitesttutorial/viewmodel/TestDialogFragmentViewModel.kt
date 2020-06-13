@@ -1,19 +1,25 @@
 package makoto.yoshida.uitesttutorial.viewmodel
 
+import androidx.arch.core.util.Function
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
+import makoto.yoshida.uitesttutorial.domain.TestEntity
 import makoto.yoshida.uitesttutorial.domain.TestRepository
 
 class TestDialogFragmentViewModel @ViewModelInject constructor (
                                   private val repository: TestRepository) : ViewModel() {
 
     val name = MutableLiveData("変わるかな？？")
-
+    private val observer = Observer<TestEntity> {
+        name.postValue(it.name)
+    }
 
     fun fetchData() {
-        repository.get(1).observeForever {
-            name.postValue(it.name)
+        repository.get(1).also { liveData ->
+            liveData.observeForever {
+                observer.onChanged(it)
+                liveData.removeObserver(observer)
+            }
         }
     }
 }

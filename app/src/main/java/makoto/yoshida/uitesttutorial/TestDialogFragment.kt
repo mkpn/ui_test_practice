@@ -1,18 +1,19 @@
 package makoto.yoshida.uitesttutorial
 
 import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import makoto.yoshida.uitesttutorial.databinding.TestDialogFragmentBinding
 import makoto.yoshida.uitesttutorial.viewmodel.TestDialogFragmentViewModel
 
 @AndroidEntryPoint
 class TestDialogFragment: DialogFragment() {
-    private val vm by viewModels<TestDialogFragmentViewModel>()
+    private val vm by activityViewModels<TestDialogFragmentViewModel>()
     lateinit var binding: TestDialogFragmentBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -23,9 +24,7 @@ class TestDialogFragment: DialogFragment() {
             null,
             false
         )
-
         binding.vm = vm
-        binding.lifecycleOwner = this
 
         builder.setView(binding.root)
         return builder.create()
