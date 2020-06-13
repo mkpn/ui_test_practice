@@ -2,16 +2,13 @@ package makoto.yoshida.uitesttutorial
 
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProviders
 import makoto.yoshida.uitesttutorial.databinding.ActivityMainBinding
-import makoto.yoshida.uitesttutorial.viewmodel.TestDialogFragmentViewModel
+import makoto.yoshida.uitesttutorial.domain.TestDataBase
+import makoto.yoshida.uitesttutorial.domain.TestEntity
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,7 +21,12 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
             val database = TestDataBase.getDatabase(this)
-            database!!.testDao().insert(TestEntity(0, "テスト"))
+            database!!.testDao().insert(
+                TestEntity(
+                    0,
+                    "テスト"
+                )
+            )
         }
 
         binding.myView.setOnClickListener {

@@ -1,13 +1,18 @@
 package makoto.yoshida.uitesttutorial.viewmodel
 
 import android.content.Context
-import android.util.Log
-import androidx.lifecycle.*
-import makoto.yoshida.uitesttutorial.TestDataBase
-import makoto.yoshida.uitesttutorial.TestEntity
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import makoto.yoshida.uitesttutorial.domain.TestDataBase
+import makoto.yoshida.uitesttutorial.domain.TestEntity
+import makoto.yoshida.uitesttutorial.domain.TestRepository
 
-class TestDialogFragmentViewModel : ViewModel() {
-    private lateinit var database : TestDataBase
+class TestDialogFragmentViewModel @ViewModelInject constructor (
+                                  private val repository: TestRepository) : ViewModel() {
+    private lateinit var database: TestDataBase
+
     val name = MutableLiveData("変わるかな？？")
 
     fun setup(context: Context) {
@@ -16,12 +21,11 @@ class TestDialogFragmentViewModel : ViewModel() {
 
     fun fetchData() {
         database.testDao().get(1).observeForever {
-        Log.d("デバッグ", "${it.name}")
             name.postValue(it.name)
         }
     }
 
-    fun test() : LiveData<TestEntity>{
+    fun test(): LiveData<TestEntity> {
         return database.testDao().get(1)
     }
 }

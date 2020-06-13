@@ -1,4 +1,4 @@
-package makoto.yoshida.uitesttutorial
+package makoto.yoshida.uitesttutorial.domain
 
 import android.content.Context
 import androidx.room.Database
@@ -14,14 +14,15 @@ abstract class TestDataBase : RoomDatabase() {
         private var instance: TestDataBase? = null
 
         fun getDatabase(context: Context): TestDataBase? {
-            return instance ?: synchronized(this) {
+            return instance
+                ?: synchronized(this) {
                 val databaseInstance = Room.databaseBuilder(context.applicationContext,
                     TestDataBase::class.java,
                     "test")
                     .allowMainThreadQueries()
                     .build()
                 instance = databaseInstance
-                instance
+                    instance
             }
         }
     }

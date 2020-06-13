@@ -1,4 +1,4 @@
-package makoto.yoshida.uitesttutorial
+package makoto.yoshida.uitesttutorial.domain
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
