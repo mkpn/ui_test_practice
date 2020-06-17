@@ -10,7 +10,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import makoto.yoshida.uitesttutorial.databinding.FragmentSecondBinding
 import makoto.yoshida.uitesttutorial.viewmodel.SecondFragmentViewModel
@@ -32,9 +34,30 @@ class SecondFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         val testEntityListAdapter = TestEntityListAdapter()
         binding.recyclerView.adapter = testEntityListAdapter
+
+        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP or ItemTouchHelper.DOWN, ItemTouchHelper.LEFT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                val fromPosition = viewHolder.adapterPosition
+                val toPosition = target.adapterPosition
+                testEntityListAdapter.notifyItemMoved(fromPosition, toPosition)
+                return true
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                // do nothing
+            }
+        })
+
+        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
+
         vm.getLiveDataList().observe(viewLifecycleOwner, Observer {
             testEntityListAdapter.submitList(it)
         })
+
         return binding.root
     }
 
