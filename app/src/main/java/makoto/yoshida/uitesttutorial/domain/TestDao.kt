@@ -8,6 +8,9 @@ abstract class TestDao {
     @Insert
     abstract fun insert(entity: TestEntity)
 
+    @Query("select max(`order`) from test")
+    abstract fun getMax(): Int
+
     @Query("select * from test")
     abstract fun getAll(): LiveData<List<TestEntity>>
 

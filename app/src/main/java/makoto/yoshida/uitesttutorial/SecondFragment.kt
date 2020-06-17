@@ -44,11 +44,20 @@ class SecondFragment : Fragment() {
                 val fromPosition = viewHolder.adapterPosition
                 val toPosition = target.adapterPosition
                 testEntityListAdapter.notifyItemMoved(fromPosition, toPosition)
+                vm.sortItem(fromPosition, toPosition)
                 return true
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 // do nothing
+            }
+
+            override fun clearView(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder
+            ) {
+                super.clearView(recyclerView, viewHolder)
+                vm.updateOrder()
             }
         })
 

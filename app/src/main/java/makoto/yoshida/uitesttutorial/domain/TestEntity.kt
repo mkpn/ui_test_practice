@@ -11,5 +11,8 @@ data class TestEntity(
     val id: Long = 0,
 
     @ColumnInfo
-    val name: String
+    val name: String,
+
+    @ColumnInfo
+    var order: Int = 0
 )

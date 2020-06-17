@@ -5,30 +5,26 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import dagger.hilt.android.AndroidEntryPoint
 import makoto.yoshida.uitesttutorial.databinding.ActivityMainBinding
-import makoto.yoshida.uitesttutorial.domain.TestDataBase
 import makoto.yoshida.uitesttutorial.domain.TestEntity
+import makoto.yoshida.uitesttutorial.viewmodel.MainActivityViewModel
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
+    private val vm by viewModels<MainActivityViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            val database = TestDataBase.getDatabase(this)
-            database!!.testDao().insert(
-                TestEntity(
-                    0,
-                    "テスト"
-                )
-            )
+        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener {
+            vm.insert()
         }
 
         binding.myView.setOnClickListener {
