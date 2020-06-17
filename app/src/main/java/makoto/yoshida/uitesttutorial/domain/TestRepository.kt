@@ -2,6 +2,7 @@ package makoto.yoshida.uitesttutorial.domain
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import java.util.ArrayList
 import javax.inject.Singleton
 
 @Singleton
@@ -23,5 +24,12 @@ class TestRepository(context: Context) {
 
     fun getAll(): LiveData<List<TestEntity>> {
         return dao.getAll()
+    }
+
+    fun updateByList(list: ArrayList<TestEntity>) {
+        list.forEachIndexed { index, entity ->
+            entity.order = index + 1
+            dao.update(entity)
+        }
     }
 }

@@ -1,10 +1,8 @@
 package makoto.yoshida.uitesttutorial.viewmodel
 
-import android.provider.MediaStore
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import makoto.yoshida.uitesttutorial.domain.TestEntity
 import makoto.yoshida.uitesttutorial.domain.TestRepository
@@ -30,6 +28,6 @@ class SecondFragmentViewModel @ViewModelInject constructor(private val repositor
     }
 
     fun updateOrder() {
-
+        repository.updateByList(list)
     }
 }
