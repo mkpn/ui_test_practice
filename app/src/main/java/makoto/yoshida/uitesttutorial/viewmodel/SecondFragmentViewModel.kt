@@ -4,15 +4,16 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
+import makoto.yoshida.uitesttutorial.domain.TestDataClass
 import makoto.yoshida.uitesttutorial.domain.TestEntity
 import makoto.yoshida.uitesttutorial.domain.TestRepository
 
 class SecondFragmentViewModel @ViewModelInject constructor(private val repository: TestRepository) :
     ViewModel() {
+    private val list = ArrayList<TestDataClass>()
 
-    private val list = ArrayList<TestEntity>()
-    fun getLiveDataList(): LiveData<List<TestEntity>> {
-        val mediatorLiveData = MediatorLiveData<List<TestEntity>>()
+    fun getLiveDataList(): MediatorLiveData<List<TestDataClass>> {
+        val mediatorLiveData = MediatorLiveData<List<TestDataClass>>()
         mediatorLiveData.addSource(repository.getAll()) {
             list.clear()
             list.addAll(it)
