@@ -23,6 +23,7 @@ class TestDialogFragment: DialogFragment() {
             null,
             false
         )
+        binding.lifecycleOwner = this
         binding.vm = vm
 
         builder.setView(binding.root)

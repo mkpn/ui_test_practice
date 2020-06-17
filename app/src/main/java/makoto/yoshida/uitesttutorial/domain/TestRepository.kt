@@ -11,4 +11,8 @@ class TestRepository(context: Context) {
     fun get(id :Long): LiveData<TestEntity> {
         return dao.get(id)
     }
+
+    fun getAll(): LiveData<List<TestEntity>> {
+        return dao.getAll()
+    }
 }
