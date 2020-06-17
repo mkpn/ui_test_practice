@@ -27,9 +27,11 @@ class TestRepository(context: Context) {
     }
 
     fun updateByList(list: ArrayList<TestEntity>) {
+        val tempList = mutableListOf<TestEntity>()
         list.forEachIndexed { index, entity ->
             entity.order = index + 1
-            dao.update(entity)
+            tempList.add(entity)
         }
+        dao.updateByList(tempList)
     }
 }

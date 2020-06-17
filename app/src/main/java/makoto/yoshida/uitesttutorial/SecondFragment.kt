@@ -64,7 +64,7 @@ class SecondFragment : Fragment() {
         itemTouchHelper.attachToRecyclerView(binding.recyclerView)
 
         vm.getLiveDataList().observe(viewLifecycleOwner, Observer {
-            testEntityListAdapter.submitList(it)
+            testEntityListAdapter.submitList(it.toList())
         })
 
         return binding.root

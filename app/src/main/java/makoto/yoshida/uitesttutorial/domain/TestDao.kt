@@ -11,6 +11,9 @@ abstract class TestDao {
     @Update
     abstract fun update(entity: TestEntity)
 
+    @Update
+    abstract fun updateByList(list: List<TestEntity>)
+
     @Query("select max(`order`) from test")
     abstract fun getMax(): Int
 
